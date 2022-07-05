@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Country {
 
-    private String shortName; // prozatím nechám, nemusí mít využití
+    private String shortName;
 
     @JsonProperty("_comment")
     private String comment;
@@ -120,16 +120,6 @@ public class Country {
 
     @Override
     public String toString() {
-        return "Country{" +
-                "shortName='" + shortName + '\'' +
-                ", comment='" + comment + '\'' +
-                ", isoDuplicate=" + isoDuplicate +
-                ", countryName='" + countryName + '\'' +
-                ", standardRate=" + standardRate +
-                ", reducedRate=" + reducedRate +
-                ", reducedRateAlt=" + reducedRateAlt +
-                ", superReducedRate=" + superReducedRate +
-                ", parkingRate=" + parkingRate +
-                '}';
+        return "Country: " + countryName + ", rate: " + standardRate + "\n";
     }
 }

@@ -15,7 +15,6 @@ import java.util.*;
 @Service
 public class CountryService {
 
-    public static final String FILENAME = "Rates.txt";
     Map<String, Country> map;
     CountryResponse countryResponse;
 
@@ -32,36 +31,83 @@ public class CountryService {
         map =  objectMapper.readValue(x, new TypeReference<Map<String, Country>>(){});
         countryResponse = objectMapper.readValue(response.body(), CountryResponse.class);
 
+
     }
 
-    public String getMax(){
-        StringBuilder output = new StringBuilder();
-        output.append(("------- Highest Rates -------") + System.lineSeparator());
-        countryResponse.rates.forEach((key, countryResponse) -> {
-            if (countryResponse.getStandardRate() >= 25.0) {
-                output.append("Country shortcut: " + key + ", ");
-                output.append("Country name: " + countryResponse.getCountryName() + ", ");
-                output.append("Standard rate: " + countryResponse.getStandardRate() + System.lineSeparator());
+//    public String getMax(){
+//        StringBuilder output = new StringBuilder();
+//        output.append(("------- Highest Rates -------") + System.lineSeparator());
+//        countryResponse.rates.forEach((key, countryResponse) -> {
+//            if (countryResponse.getStandardRate() >= 25.0) {
+//                output.append("Country shortcut: " + key + ", ");
+//                output.append("Country name: " + countryResponse.getCountryName() + ", ");
+//                output.append("Standard rate: " + countryResponse.getStandardRate() + System.lineSeparator());
+//            }
+//        });
+//        return output.toString();
+//    }
+
+//    public String getMin(){
+//        StringBuilder output = new StringBuilder();
+//        output.append(("------- Lowest Rates -------") + System.lineSeparator());
+//        countryResponse.rates.forEach((key, countryResponse) -> {
+//            if (countryResponse.getStandardRate() <= 19.0) {
+//                output.append("Country shortcut: " + key + ", ");
+//                output.append("Country name: " + countryResponse.getCountryName() + ", ");
+//                output.append("Standard rate: " + countryResponse.getStandardRate() + System.lineSeparator());
+//            }
+//        });
+//        return output.toString();
+//    }
+
+
+    // případně by mohl být String a být vypsaná forma toString ...
+    public List<Country> getMinRate(){
+
+        List<Country> countryList = new ArrayList<Country>(countryResponse.rates.values());
+
+        Collections.sort(countryList, new Comparator<Country>() {
+            @Override
+            public int compare(Country country1, Country country2) {
+                return country1.getStandardRate().compareTo(country2.getStandardRate());
             }
         });
-        return output.toString();
+
+        List<Country> lowRates = new ArrayList<>();
+
+        lowRates.add(countryList.get(0));
+        lowRates.add(countryList.get(1));
+        lowRates.add(countryList.get(2));
+
+        return lowRates;
+
+
     }
 
-    public String getMin(){
-        StringBuilder output = new StringBuilder();
-        output.append(("------- Lowest Rates -------") + System.lineSeparator());
-        countryResponse.rates.forEach((key, countryResponse) -> {
-            if (countryResponse.getStandardRate() <= 19.0) {
-                output.append("Country shortcut: " + key + ", ");
-                output.append("Country name: " + countryResponse.getCountryName() + ", ");
-                output.append("Standard rate: " + countryResponse.getStandardRate() + System.lineSeparator());
+
+    public List<Country> getMaxRate(){
+        List<Country> countryList = new ArrayList<Country>(countryResponse.rates.values());
+
+        Collections.sort(countryList, new Comparator<Country>() {
+            @Override
+            public int compare(Country country1, Country country2) {
+                return country1.getStandardRate().compareTo(country2.getStandardRate());
             }
-        });
-        return output.toString();
+        }.reversed());
+
+        List<Country> lowRates = new ArrayList<>();
+
+        lowRates.add(countryList.get(0));
+        lowRates.add(countryList.get(1));
+        lowRates.add(countryList.get(2));
+
+        return lowRates;
     }
+
 
     public Country getCountryByShortCut(String shortName){
         return countryResponse.getRates().get(shortName);
     }
+
 
 }

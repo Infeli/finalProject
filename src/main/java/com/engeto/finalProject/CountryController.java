@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 public class CountryController {
@@ -13,13 +15,13 @@ public class CountryController {
     CountryService countryService;
 
     @GetMapping("/min")
-    public String getMin(){
-        return countryService.getMin();
+    public List<Country> getMinRate(){
+        return countryService.getMinRate();
     }
 
     @GetMapping("/max")
-    public String getMax(){
-        return countryService.getMax();
+    public List<Country> getMaxRate(){
+        return countryService.getMaxRate();
     }
 
     // shortName zkratku potřeba napsat velkými písmeny!
@@ -27,6 +29,7 @@ public class CountryController {
     public Country getCountryByShortCut(@PathVariable String shortName){
         return countryService.getCountryByShortCut(shortName);
     }
+
 
 
 

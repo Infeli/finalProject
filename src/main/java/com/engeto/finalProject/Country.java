@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class Country {
+public class Country implements Comparable<Country>{
 
     private String shortName;
 
@@ -18,7 +18,7 @@ public class Country {
     private String countryName;
 
     @JsonProperty("standard_rate")
-    private double standardRate;
+    private Integer standardRate; //double
 
     @JsonProperty("reduced_rate")
     private Object reducedRate;
@@ -65,11 +65,11 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public double getStandardRate() {
+    public Integer getStandardRate() {
         return standardRate;
     }
 
-    public void setStandardRate(double standardRate) {
+    public void setStandardRate(Integer standardRate) {
         this.standardRate = standardRate;
     }
 
@@ -118,8 +118,15 @@ public class Country {
         return Objects.hash(getShortName(), getComment(), isoDuplicate, getCountryName(), getStandardRate(), getReducedRate(), getReducedRateAlt(), superReducedRate, parkingRate);
     }
 
+
     @Override
     public String toString() {
         return "Country: " + countryName + ", rate: " + standardRate + "\n";
     }
+
+    @Override
+    public int compareTo(Country country){
+        return 0;
+    }
+
 }

@@ -13,4 +13,6 @@ public class CountryResponse {
     public void setRates(Map<String, Country> rates) {
         this.rates = rates;
     }
+
+
 }

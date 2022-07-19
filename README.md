@@ -4,6 +4,7 @@ Engeto - final project
 Finální projekt v rámci java akademie
 
 Úkolem bylo načíst data, rozparsovat, vyhledat 3 země s nejvyššími sazbami a 3 země s nejnižšími sazbami a vypsat je do konzole - (Já zvolil bonusový úkol a formu vypsání na server)
+
 Zároveň bonusové úkoly implementovat vyhledávání daňových sazeb podle zkratek zemí a vytvořit vlastní HTTP API, které vystaví danou funkcionalitu přes webový server
 Zdroj dat: https://euvatrates.com/rates.json
 
